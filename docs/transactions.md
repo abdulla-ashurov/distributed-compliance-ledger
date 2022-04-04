@@ -1247,56 +1247,64 @@ Updates the Validator node by the owner.
 - Who can send:
   - NodeAdmin; owner
 
-#### DISABLE_VALIDATOR_NODE
+#### REMOVE_VALIDATOR_NODE
 
-**Status: Implemented**
+**Status: Not Implemented**
 
-Disables the Validator node (removes from the validator set) by the owner.
+Deletes the Validator node (removes from the validator set) by the owner.
 
+- Parameters:
+  - address: `string` - Bech32 encoded validator address or owner account
 - Who can send:
   - NodeAdmin; owner
 
-#### PROPOSE_DISABLE_VALIDATOR_NODE
+#### PROPOSE_REMOVE_VALIDATOR_NODE
 
-**Status: Implemented**
+**Status: Not Implemented**
 
-Proposes disabling of the Validator node from the validator set by a Trustee.
+Proposes removing the Validator node from the validator set by a Trustee.
 
-If more than 1 Trustee signature is required to disable a node, the disable
+If more than 1 Trustee signature is required to remove a node, the removal
 will be in a pending state until sufficient number of approvals is received.
 
 - Parameters:
   - address: `string` - Bech32 encoded validator address or owner account
-  - info: `optional(string)` - information/notes for the proposal
 - Who can send:
   - Trustee
 
-#### APPROVE_DISABLE_VALIDATOR_NODE
+#### APPROVE_REMOVE_VALIDATOR_NODE
 
-**Status: Implemented**
+**Status: Not Implemented**
 
-Approves disabling of the Validator node by a Trustee.
+Approves removing of the Validator node by a Trustee.
 
-The validator node is not disabled until sufficient number of Trustees approve it.
+The account is not removed until sufficient number of Trustees approve it.
 
 - Parameters:
   - address: `string` - Bech32 encoded validator address or owner account
-  - info: `optional(string)` - information/notes for the approval
 - Who can send:
   - Trustee
 - Number of required approvals:
   - 2/3 of Trustees
 
-#### ENABLE_VALIDATOR_NODE
+#### UNJAIL_VALIDATOR_NODE
 
-**Status: Implemented**
+**Status: Not Implemented**
 
-Enables the Validator node (returns to the validator set) by the owner.
+Approves unjail of the Validator node from jailed state and returning to the active validator state.
 
-the node will be enabled and returned to the active validator set.
+If more than 1 Trustee approval is required to unjail a node, the node still
+will be in a jailed state until sufficient number of approvals is received.
 
+If 1 Trustee approval is required to unjail a nod or sufficient number of approvals is received,
+the node will be unjailed and returned to the active validator set.
+
+- Parameters:
+  - address: `string` - Bech32 encoded validator address or owner account
 - Who can send:
-  - NodeAdmin; owner
+  - Trustee
+- Number of required approvals:
+  - 2/3 of Trustees
 
 ## UPGRADE
 

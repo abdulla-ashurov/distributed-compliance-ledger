@@ -30,10 +30,6 @@ func GetQueryCmd(queryRoute string) *cobra.Command {
 	// TODO verify commands implementation if we need them
 	cmd.AddCommand(CmdListLastValidatorPower())
 	cmd.AddCommand(CmdShowLastValidatorPower())
-	cmd.AddCommand(CmdListProposedDisableValidator())
-	cmd.AddCommand(CmdShowProposedDisableValidator())
-	cmd.AddCommand(CmdListDisabledValidator())
-	cmd.AddCommand(CmdShowDisabledValidator())
 	// this line is used by starport scaffolding # 1
 
 	return cmd
