@@ -1,0 +1,15 @@
+[Unit]
+Description=DC Ledger service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=dcl
+Environment="DAEMON_HOME=/var/lib/dcl/.dcl" "DAEMON_NAME=dcld"
+ExecStart=/usr/bin/cosmovisor start
+
+[Install]
+WantedBy=multi-user.target
