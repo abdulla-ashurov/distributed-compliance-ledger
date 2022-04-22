@@ -27,10 +27,16 @@ services:
       - "26630:9090"
     volumes:
       - ./.localnet/node0:/var/lib/dcl/.dcl:Z
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
+
     networks:
       localnet:
         ipv4_address: 192.167.10.2
-    command: cosmovisor start
+    # command: cosmovisor start
 
   node1:
     image: dcledger
@@ -43,10 +49,16 @@ services:
       - "26631:9090"
     volumes:
       - ./.localnet/node1:/var/lib/dcl/.dcl:Z
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
+
     networks:
       localnet:
         ipv4_address: 192.167.10.3
-    command: cosmovisor start
+    # command: cosmovisor start
 
   node2:
     image: dcledger
@@ -59,10 +71,15 @@ services:
       - "26632:9090"
     volumes:
       - ./.localnet/node2:/var/lib/dcl/.dcl:Z
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
     networks:
       localnet:
         ipv4_address: 192.167.10.4
-    command: cosmovisor start
+    # command: cosmovisor start
 
   node3:
     image: dcledger
@@ -75,10 +92,15 @@ services:
       - "26633:9090"
     volumes:
       - ./.localnet/node3:/var/lib/dcl/.dcl:Z
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
     networks:
       localnet:
         ipv4_address: 192.167.10.5
-    command: cosmovisor start
+    # command: cosmovisor start
 
   observer0:
     image: dcledger
