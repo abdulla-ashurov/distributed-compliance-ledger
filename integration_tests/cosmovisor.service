@@ -8,7 +8,9 @@ Type=simple
 Restart=always
 RestartSec=1
 User=dcl
-Environment="DAEMON_HOME=/var/lib/dcl/.dcl" "DAEMON_NAME=dcld"
+Environment="DAEMON_HOME=/var/lib/dcl/.dcl" 
+Environment="DAEMON_NAME=dcld" 
+Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=true"
 ExecStart=/usr/bin/cosmovisor start
 
 [Install]
