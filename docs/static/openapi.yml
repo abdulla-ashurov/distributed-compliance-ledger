@@ -273,6 +273,8 @@ paths:
                           cDVersionNumber:
                             type: integer
                             format: int64
+                    CDCertificateID:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -434,6 +436,8 @@ paths:
                         cDVersionNumber:
                           type: integer
                           format: int64
+                  CDCertificateID:
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -13917,6 +13921,8 @@ definitions:
             cDVersionNumber:
               type: integer
               format: int64
+      CDCertificateID:
+        type: string
   zigbeealliance.distributedcomplianceledger.compliance.ComplianceInformation:
     type: object
     properties:
@@ -14120,6 +14126,8 @@ definitions:
                   cDVersionNumber:
                     type: integer
                     format: int64
+            CDCertificateID:
+              type: string
       pagination:
         type: object
         properties:
@@ -14382,6 +14390,8 @@ definitions:
                 cDVersionNumber:
                   type: integer
                   format: int64
+          CDCertificateID:
+            type: string
   zigbeealliance.distributedcomplianceledger.compliance.QueryGetDeviceSoftwareComplianceResponse:
     type: object
     properties:
