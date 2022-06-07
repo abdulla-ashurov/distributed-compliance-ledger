@@ -77,12 +77,6 @@ dcld_v0_10_0="./.localnet/node0/cosmovisor/upgrades/v0.10.0/bin/dcld"
 
 original_model_module_version=1
 
-get_height current_height
-echo "Current height is $current_height"
-
-plan_height=$(expr $current_height + 20)
-plan_name=v0.10.0
-
 random_string vendor_account
 vid=1
 pid=2
@@ -372,6 +366,12 @@ test_divider
 # ###########################################################################################################################################
 # # SECTION UPGRADE
 # ###########################################################################################################################################
+
+get_height current_height
+echo "Current height is $current_height"
+
+plan_height=$(expr $current_height + 5)
+plan_name=v0.10.0
 
 # Body
 echo "Propose upgrade $plan_name at height $plan_height"
