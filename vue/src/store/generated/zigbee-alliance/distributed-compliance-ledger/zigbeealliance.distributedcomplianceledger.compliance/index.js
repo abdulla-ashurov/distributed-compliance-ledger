@@ -4,9 +4,10 @@ import { SpVuexError } from '@starport/vuex';
 import { CertifiedModel } from "./module/types/compliance/certified_model";
 import { ComplianceHistoryItem } from "./module/types/compliance/compliance_history_item";
 import { ComplianceInfo } from "./module/types/compliance/compliance_info";
+import { ComplianceInformation } from "./module/types/compliance/compliance_information";
 import { ProvisionalModel } from "./module/types/compliance/provisional_model";
 import { RevokedModel } from "./module/types/compliance/revoked_model";
-export { CertifiedModel, ComplianceHistoryItem, ComplianceInfo, ProvisionalModel, RevokedModel };
+export { CertifiedModel, ComplianceHistoryItem, ComplianceInfo, ComplianceInformation, ProvisionalModel, RevokedModel };
 async function initTxClient(vuexGetters) {
     return await txClient(vuexGetters['common/wallet/signer'], {
         addr: vuexGetters['common/env/apiTendermint']
@@ -52,6 +53,7 @@ const getDefaultState = () => {
             CertifiedModel: getStructure(CertifiedModel.fromPartial({})),
             ComplianceHistoryItem: getStructure(ComplianceHistoryItem.fromPartial({})),
             ComplianceInfo: getStructure(ComplianceInfo.fromPartial({})),
+            ComplianceInformation: getStructure(ComplianceInformation.fromPartial({})),
             ProvisionalModel: getStructure(ProvisionalModel.fromPartial({})),
             RevokedModel: getStructure(RevokedModel.fromPartial({})),
         },
@@ -305,23 +307,6 @@ export default {
                 }
             }
         },
-        async sendMsgProvisionModel({ rootGetters }, { value, fee = [], memo = '' }) {
-            try {
-                const txClient = await initTxClient(rootGetters);
-                const msg = await txClient.msgProvisionModel(value);
-                const result = await txClient.signAndBroadcast([msg], { fee: { amount: fee,
-                        gas: "200000" }, memo });
-                return result;
-            }
-            catch (e) {
-                if (e == MissingWalletError) {
-                    throw new SpVuexError('TxClient:MsgProvisionModel:Init', 'Could not initialize signing client. Wallet is required.');
-                }
-                else {
-                    throw new SpVuexError('TxClient:MsgProvisionModel:Send', 'Could not broadcast Tx: ' + e.message);
-                }
-            }
-        },
         async sendMsgRevokeModel({ rootGetters }, { value, fee = [], memo = '' }) {
             try {
                 const txClient = await initTxClient(rootGetters);
@@ -336,6 +321,23 @@ export default {
                 }
                 else {
                     throw new SpVuexError('TxClient:MsgRevokeModel:Send', 'Could not broadcast Tx: ' + e.message);
+                }
+            }
+        },
+        async sendMsgProvisionModel({ rootGetters }, { value, fee = [], memo = '' }) {
+            try {
+                const txClient = await initTxClient(rootGetters);
+                const msg = await txClient.msgProvisionModel(value);
+                const result = await txClient.signAndBroadcast([msg], { fee: { amount: fee,
+                        gas: "200000" }, memo });
+                return result;
+            }
+            catch (e) {
+                if (e == MissingWalletError) {
+                    throw new SpVuexError('TxClient:MsgProvisionModel:Init', 'Could not initialize signing client. Wallet is required.');
+                }
+                else {
+                    throw new SpVuexError('TxClient:MsgProvisionModel:Send', 'Could not broadcast Tx: ' + e.message);
                 }
             }
         },
@@ -354,21 +356,6 @@ export default {
                 }
             }
         },
-        async MsgProvisionModel({ rootGetters }, { value }) {
-            try {
-                const txClient = await initTxClient(rootGetters);
-                const msg = await txClient.msgProvisionModel(value);
-                return msg;
-            }
-            catch (e) {
-                if (e == MissingWalletError) {
-                    throw new SpVuexError('TxClient:MsgProvisionModel:Init', 'Could not initialize signing client. Wallet is required.');
-                }
-                else {
-                    throw new SpVuexError('TxClient:MsgProvisionModel:Create', 'Could not create message: ' + e.message);
-                }
-            }
-        },
         async MsgRevokeModel({ rootGetters }, { value }) {
             try {
                 const txClient = await initTxClient(rootGetters);
@@ -381,6 +368,21 @@ export default {
                 }
                 else {
                     throw new SpVuexError('TxClient:MsgRevokeModel:Create', 'Could not create message: ' + e.message);
+                }
+            }
+        },
+        async MsgProvisionModel({ rootGetters }, { value }) {
+            try {
+                const txClient = await initTxClient(rootGetters);
+                const msg = await txClient.msgProvisionModel(value);
+                return msg;
+            }
+            catch (e) {
+                if (e == MissingWalletError) {
+                    throw new SpVuexError('TxClient:MsgProvisionModel:Init', 'Could not initialize signing client. Wallet is required.');
+                }
+                else {
+                    throw new SpVuexError('TxClient:MsgProvisionModel:Create', 'Could not create message: ' + e.message);
                 }
             }
         },
