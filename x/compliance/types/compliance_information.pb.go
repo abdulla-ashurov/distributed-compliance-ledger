@@ -5,6 +5,7 @@ package types
 
 import (
 	fmt "fmt"
+	_ "github.com/cosmos/cosmos-proto"
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
@@ -23,14 +24,17 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type ComplianceInformation struct {
-	SoftwareVersionString              string   `protobuf:"bytes,1,opt,name=softwareVersionString,proto3" json:"softwareVersionString,omitempty"`
-	CDVersionNumber                    uint64   `protobuf:"varint,2,opt,name=cDVersionNumber,proto3" json:"cDVersionNumber,omitempty"`
-	SoftwareVersionCertificationStatus uint64   `protobuf:"varint,3,opt,name=softwareVersionCertificationStatus,proto3" json:"softwareVersionCertificationStatus,omitempty"`
-	History                            []string `protobuf:"bytes,4,rep,name=history,proto3" json:"history,omitempty"`
-	Vid                                int32    `protobuf:"varint,5,opt,name=vid,proto3" json:"vid,omitempty"`
-	Pid                                int32    `protobuf:"varint,6,opt,name=pid,proto3" json:"pid,omitempty"`
-	SoftwareVersion                    uint64   `protobuf:"varint,7,opt,name=softwareVersion,proto3" json:"softwareVersion,omitempty"`
-	CertificationType                  string   `protobuf:"bytes,8,opt,name=certificationType,proto3" json:"certificationType,omitempty"`
+	Vid                                int32                    `protobuf:"varint,1,opt,name=vid,proto3" json:"vid,omitempty"`
+	Pid                                int32                    `protobuf:"varint,2,opt,name=pid,proto3" json:"pid,omitempty"`
+	SoftwareVersion                    uint32                   `protobuf:"varint,3,opt,name=softwareVersion,proto3" json:"softwareVersion,omitempty"`
+	CertificationType                  string                   `protobuf:"bytes,4,opt,name=certificationType,proto3" json:"certificationType,omitempty"`
+	SoftwareVersionString              string                   `protobuf:"bytes,5,opt,name=softwareVersionString,proto3" json:"softwareVersionString,omitempty"`
+	CDVersionNumber                    uint32                   `protobuf:"varint,6,opt,name=cDVersionNumber,proto3" json:"cDVersionNumber,omitempty"`
+	SoftwareVersionCertificationStatus uint32                   `protobuf:"varint,7,opt,name=softwareVersionCertificationStatus,proto3" json:"softwareVersionCertificationStatus,omitempty"`
+	Date                               string                   `protobuf:"bytes,8,opt,name=date,proto3" json:"date,omitempty"`
+	Reason                             string                   `protobuf:"bytes,9,opt,name=reason,proto3" json:"reason,omitempty"`
+	Owner                              string                   `protobuf:"bytes,10,opt,name=owner,proto3" json:"owner,omitempty"`
+	History                            []*ComplianceHistoryItem `protobuf:"bytes,11,rep,name=history,proto3" json:"history,omitempty"`
 }
 
 func (m *ComplianceInformation) Reset()         { *m = ComplianceInformation{} }
@@ -66,34 +70,6 @@ func (m *ComplianceInformation) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ComplianceInformation proto.InternalMessageInfo
 
-func (m *ComplianceInformation) GetSoftwareVersionString() string {
-	if m != nil {
-		return m.SoftwareVersionString
-	}
-	return ""
-}
-
-func (m *ComplianceInformation) GetCDVersionNumber() uint64 {
-	if m != nil {
-		return m.CDVersionNumber
-	}
-	return 0
-}
-
-func (m *ComplianceInformation) GetSoftwareVersionCertificationStatus() uint64 {
-	if m != nil {
-		return m.SoftwareVersionCertificationStatus
-	}
-	return 0
-}
-
-func (m *ComplianceInformation) GetHistory() []string {
-	if m != nil {
-		return m.History
-	}
-	return nil
-}
-
 func (m *ComplianceInformation) GetVid() int32 {
 	if m != nil {
 		return m.Vid
@@ -108,7 +84,7 @@ func (m *ComplianceInformation) GetPid() int32 {
 	return 0
 }
 
-func (m *ComplianceInformation) GetSoftwareVersion() uint64 {
+func (m *ComplianceInformation) GetSoftwareVersion() uint32 {
 	if m != nil {
 		return m.SoftwareVersion
 	}
@@ -122,6 +98,55 @@ func (m *ComplianceInformation) GetCertificationType() string {
 	return ""
 }
 
+func (m *ComplianceInformation) GetSoftwareVersionString() string {
+	if m != nil {
+		return m.SoftwareVersionString
+	}
+	return ""
+}
+
+func (m *ComplianceInformation) GetCDVersionNumber() uint32 {
+	if m != nil {
+		return m.CDVersionNumber
+	}
+	return 0
+}
+
+func (m *ComplianceInformation) GetSoftwareVersionCertificationStatus() uint32 {
+	if m != nil {
+		return m.SoftwareVersionCertificationStatus
+	}
+	return 0
+}
+
+func (m *ComplianceInformation) GetDate() string {
+	if m != nil {
+		return m.Date
+	}
+	return ""
+}
+
+func (m *ComplianceInformation) GetReason() string {
+	if m != nil {
+		return m.Reason
+	}
+	return ""
+}
+
+func (m *ComplianceInformation) GetOwner() string {
+	if m != nil {
+		return m.Owner
+	}
+	return ""
+}
+
+func (m *ComplianceInformation) GetHistory() []*ComplianceHistoryItem {
+	if m != nil {
+		return m.History
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*ComplianceInformation)(nil), "zigbeealliance.distributedcomplianceledger.compliance.ComplianceInformation")
 }
@@ -131,28 +156,34 @@ func init() {
 }
 
 var fileDescriptor_478b2cdaf8e13e9e = []byte{
-	// 327 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x92, 0x3b, 0x4e, 0xc3, 0x40,
-	0x10, 0x86, 0xb3, 0x79, 0x92, 0x6d, 0x80, 0x95, 0x22, 0x6d, 0x65, 0x59, 0x69, 0x70, 0x41, 0xe2,
-	0x02, 0xb8, 0x00, 0xa1, 0x41, 0x48, 0x29, 0x1c, 0x44, 0x41, 0x83, 0xfc, 0x98, 0x38, 0x23, 0x25,
-	0x5e, 0x6b, 0x3d, 0x06, 0xc2, 0x29, 0x38, 0x16, 0x65, 0x4a, 0x1a, 0x24, 0x94, 0x5c, 0x04, 0xd9,
-	0x26, 0xd8, 0x32, 0x14, 0x74, 0x3b, 0xff, 0x3c, 0xfe, 0xd1, 0x7e, 0xc3, 0x4f, 0x7c, 0xb5, 0x8a,
-	0x97, 0xe8, 0x46, 0x3e, 0xd8, 0xe5, 0xf3, 0x01, 0xa3, 0xb9, 0xd2, 0x2b, 0x97, 0x50, 0x45, 0xe3,
-	0x58, 0x2b, 0x52, 0xe2, 0xe2, 0x05, 0x43, 0x0f, 0xc0, 0x5d, 0x16, 0x15, 0xe3, 0x00, 0x13, 0xd2,
-	0xe8, 0xa5, 0x04, 0x41, 0xd9, 0xb7, 0x84, 0x20, 0x04, 0x3d, 0x2e, 0x85, 0xe1, 0x47, 0x93, 0x0f,
-	0x26, 0x3f, 0xe1, 0x75, 0x39, 0x56, 0x9c, 0xf3, 0x41, 0xa2, 0xe6, 0xf4, 0xe4, 0x6a, 0xb8, 0x03,
-	0x9d, 0xa0, 0x8a, 0x66, 0xa4, 0x31, 0x0a, 0x25, 0x33, 0x99, 0xd5, 0x77, 0xfe, 0x4e, 0x0a, 0x8b,
-	0x1f, 0xfa, 0x57, 0xdf, 0xd2, 0x34, 0x5d, 0x79, 0xa0, 0x65, 0xd3, 0x64, 0x56, 0xdb, 0xa9, 0xcb,
-	0x62, 0xca, 0x87, 0xb5, 0x11, 0x13, 0xd0, 0x84, 0x73, 0xf4, 0x73, 0xff, 0x19, 0xb9, 0x94, 0x26,
-	0xb2, 0x95, 0x37, 0xff, 0xa3, 0x52, 0x48, 0xde, 0x5b, 0x60, 0x42, 0x4a, 0xaf, 0x65, 0xdb, 0x6c,
-	0x59, 0x7d, 0x67, 0x1f, 0x8a, 0x23, 0xde, 0x7a, 0xc4, 0x40, 0x76, 0x4c, 0x66, 0x75, 0x9c, 0xec,
-	0x99, 0x29, 0x31, 0x06, 0xb2, 0x5b, 0x28, 0x31, 0x06, 0xd9, 0xde, 0x35, 0x0f, 0xd9, 0x2b, 0xf6,
-	0xae, 0xc9, 0xe2, 0x94, 0x1f, 0xfb, 0x55, 0xfb, 0xdb, 0x75, 0x0c, 0xf2, 0x20, 0xff, 0x93, 0xdf,
-	0x89, 0x4b, 0x78, 0xdb, 0x1a, 0x6c, 0xb3, 0x35, 0xd8, 0xe7, 0xd6, 0x60, 0xaf, 0x3b, 0xa3, 0xb1,
-	0xd9, 0x19, 0x8d, 0xf7, 0x9d, 0xd1, 0xb8, 0xbf, 0x09, 0x91, 0x16, 0xa9, 0x97, 0xc1, 0xb0, 0x0b,
-	0x76, 0xa3, 0x3d, 0x3c, 0xbb, 0x02, 0x6f, 0x54, 0xc2, 0x1a, 0x15, 0xf8, 0xec, 0xe7, 0xca, 0x25,
-	0xd8, 0xb4, 0x8e, 0x21, 0xf1, 0xba, 0xf9, 0x11, 0x9c, 0x7d, 0x05, 0x00, 0x00, 0xff, 0xff, 0xaf,
-	0x7e, 0x10, 0x7e, 0x2f, 0x02, 0x00, 0x00,
+	// 423 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0xbd, 0x6e, 0xd4, 0x40,
+	0x10, 0x3e, 0x73, 0x3f, 0x21, 0x1b, 0x21, 0x60, 0x45, 0xd0, 0x92, 0xc2, 0xb2, 0xd2, 0xe0, 0x02,
+	0xdb, 0x12, 0x3f, 0x0f, 0x40, 0x42, 0x41, 0x04, 0x4a, 0xe1, 0x20, 0x0a, 0x9a, 0x93, 0xed, 0x1d,
+	0x3b, 0x23, 0x9d, 0xbd, 0xd6, 0xee, 0x9a, 0x70, 0xbc, 0x00, 0x2d, 0x0f, 0xc3, 0x43, 0x50, 0x9e,
+	0xa8, 0x28, 0xd1, 0xdd, 0x8b, 0x20, 0xef, 0xfa, 0xf0, 0xc9, 0x5c, 0x81, 0xe8, 0x76, 0xbe, 0x99,
+	0xef, 0x67, 0x35, 0x43, 0x1e, 0x67, 0xa2, 0xac, 0x17, 0x98, 0x54, 0x19, 0x44, 0xfd, 0x73, 0x8e,
+	0x55, 0x2e, 0x64, 0x99, 0x68, 0x14, 0x55, 0x58, 0x4b, 0xa1, 0x05, 0x7d, 0xf1, 0x19, 0x8b, 0x14,
+	0x20, 0x59, 0xd8, 0x89, 0x90, 0xa3, 0xd2, 0x12, 0xd3, 0x46, 0x03, 0xef, 0x79, 0x0b, 0xe0, 0x05,
+	0xc8, 0xb0, 0x07, 0x4e, 0xfc, 0xfd, 0xfa, 0xd7, 0xa8, 0xb4, 0x90, 0xcb, 0x39, 0x6a, 0x28, 0xad,
+	0xc1, 0xc9, 0xa3, 0x4c, 0xa8, 0x52, 0xa8, 0xb9, 0xa9, 0x22, 0x5b, 0xd8, 0xd6, 0xe9, 0x97, 0x09,
+	0x39, 0x3e, 0xff, 0x43, 0xbe, 0xe8, 0xb3, 0xd1, 0x7b, 0x64, 0xfc, 0x11, 0x39, 0x73, 0x3c, 0xc7,
+	0x9f, 0xc6, 0xed, 0xb3, 0x45, 0x6a, 0xe4, 0xec, 0x96, 0x45, 0x6a, 0xe4, 0xd4, 0x27, 0x77, 0x95,
+	0xc8, 0xf5, 0x4d, 0x22, 0xe1, 0x3d, 0x48, 0x85, 0xa2, 0x62, 0x63, 0xcf, 0xf1, 0xef, 0xc4, 0x43,
+	0x98, 0x3e, 0x21, 0xf7, 0x33, 0x90, 0x1a, 0x73, 0xcc, 0x8c, 0xfc, 0xbb, 0x65, 0x0d, 0x6c, 0xe2,
+	0x39, 0xfe, 0x61, 0xfc, 0x77, 0x83, 0x3e, 0x27, 0xc7, 0x03, 0x81, 0x2b, 0x2d, 0xb1, 0x2a, 0xd8,
+	0xd4, 0x30, 0xf6, 0x37, 0xdb, 0x34, 0xd9, 0xab, 0x0e, 0xba, 0x6c, 0xca, 0x14, 0x24, 0x9b, 0xd9,
+	0x34, 0x03, 0x98, 0x5e, 0x92, 0xd3, 0x81, 0xc4, 0xf9, 0x6e, 0x86, 0x2b, 0x9d, 0xe8, 0x46, 0xb1,
+	0x03, 0x43, 0xfe, 0x87, 0x49, 0x4a, 0xc9, 0x84, 0x27, 0x1a, 0xd8, 0x6d, 0x13, 0xcf, 0xbc, 0xe9,
+	0x43, 0x32, 0x93, 0x90, 0x28, 0x51, 0xb1, 0x43, 0x83, 0x76, 0x15, 0x0d, 0xc9, 0x54, 0xdc, 0x54,
+	0x20, 0x19, 0x69, 0xe1, 0x33, 0xf6, 0xe3, 0x5b, 0xf0, 0xa0, 0x5b, 0xc9, 0x4b, 0xce, 0x25, 0x28,
+	0x65, 0xbf, 0x13, 0xdb, 0x31, 0x9a, 0x93, 0x83, 0x6e, 0xa5, 0xec, 0xc8, 0x1b, 0xfb, 0x47, 0x4f,
+	0xdf, 0x86, 0xff, 0x75, 0x2f, 0x61, 0xbf, 0xe6, 0xd7, 0x56, 0xef, 0x42, 0x43, 0x19, 0x6f, 0xc5,
+	0xcf, 0xe0, 0xfb, 0xda, 0x75, 0x56, 0x6b, 0xd7, 0xf9, 0xb5, 0x76, 0x9d, 0xaf, 0x1b, 0x77, 0xb4,
+	0xda, 0xb8, 0xa3, 0x9f, 0x1b, 0x77, 0xf4, 0xe1, 0x4d, 0x81, 0xfa, 0xba, 0x49, 0x5b, 0xad, 0xc8,
+	0x5a, 0x07, 0x5b, 0xef, 0x68, 0xc7, 0x3b, 0xe8, 0xbd, 0x02, 0xeb, 0x1e, 0x7d, 0xda, 0x39, 0xcc,
+	0x48, 0x2f, 0x6b, 0x50, 0xe9, 0xcc, 0xdc, 0xdd, 0xb3, 0xdf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x26,
+	0x06, 0xdd, 0x6f, 0x1e, 0x03, 0x00, 0x00,
 }
 
 func (m *ComplianceInformation) Marshal() (dAtA []byte, err error) {
@@ -175,53 +206,79 @@ func (m *ComplianceInformation) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.CertificationType) > 0 {
-		i -= len(m.CertificationType)
-		copy(dAtA[i:], m.CertificationType)
-		i = encodeVarintComplianceInformation(dAtA, i, uint64(len(m.CertificationType)))
-		i--
-		dAtA[i] = 0x42
-	}
-	if m.SoftwareVersion != 0 {
-		i = encodeVarintComplianceInformation(dAtA, i, uint64(m.SoftwareVersion))
-		i--
-		dAtA[i] = 0x38
-	}
-	if m.Pid != 0 {
-		i = encodeVarintComplianceInformation(dAtA, i, uint64(m.Pid))
-		i--
-		dAtA[i] = 0x30
-	}
-	if m.Vid != 0 {
-		i = encodeVarintComplianceInformation(dAtA, i, uint64(m.Vid))
-		i--
-		dAtA[i] = 0x28
-	}
 	if len(m.History) > 0 {
 		for iNdEx := len(m.History) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.History[iNdEx])
-			copy(dAtA[i:], m.History[iNdEx])
-			i = encodeVarintComplianceInformation(dAtA, i, uint64(len(m.History[iNdEx])))
+			{
+				size, err := m.History[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintComplianceInformation(dAtA, i, uint64(size))
+			}
 			i--
-			dAtA[i] = 0x22
+			dAtA[i] = 0x5a
 		}
+	}
+	if len(m.Owner) > 0 {
+		i -= len(m.Owner)
+		copy(dAtA[i:], m.Owner)
+		i = encodeVarintComplianceInformation(dAtA, i, uint64(len(m.Owner)))
+		i--
+		dAtA[i] = 0x52
+	}
+	if len(m.Reason) > 0 {
+		i -= len(m.Reason)
+		copy(dAtA[i:], m.Reason)
+		i = encodeVarintComplianceInformation(dAtA, i, uint64(len(m.Reason)))
+		i--
+		dAtA[i] = 0x4a
+	}
+	if len(m.Date) > 0 {
+		i -= len(m.Date)
+		copy(dAtA[i:], m.Date)
+		i = encodeVarintComplianceInformation(dAtA, i, uint64(len(m.Date)))
+		i--
+		dAtA[i] = 0x42
 	}
 	if m.SoftwareVersionCertificationStatus != 0 {
 		i = encodeVarintComplianceInformation(dAtA, i, uint64(m.SoftwareVersionCertificationStatus))
 		i--
-		dAtA[i] = 0x18
+		dAtA[i] = 0x38
 	}
 	if m.CDVersionNumber != 0 {
 		i = encodeVarintComplianceInformation(dAtA, i, uint64(m.CDVersionNumber))
 		i--
-		dAtA[i] = 0x10
+		dAtA[i] = 0x30
 	}
 	if len(m.SoftwareVersionString) > 0 {
 		i -= len(m.SoftwareVersionString)
 		copy(dAtA[i:], m.SoftwareVersionString)
 		i = encodeVarintComplianceInformation(dAtA, i, uint64(len(m.SoftwareVersionString)))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x2a
+	}
+	if len(m.CertificationType) > 0 {
+		i -= len(m.CertificationType)
+		copy(dAtA[i:], m.CertificationType)
+		i = encodeVarintComplianceInformation(dAtA, i, uint64(len(m.CertificationType)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if m.SoftwareVersion != 0 {
+		i = encodeVarintComplianceInformation(dAtA, i, uint64(m.SoftwareVersion))
+		i--
+		dAtA[i] = 0x18
+	}
+	if m.Pid != 0 {
+		i = encodeVarintComplianceInformation(dAtA, i, uint64(m.Pid))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.Vid != 0 {
+		i = encodeVarintComplianceInformation(dAtA, i, uint64(m.Vid))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -243,22 +300,6 @@ func (m *ComplianceInformation) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.SoftwareVersionString)
-	if l > 0 {
-		n += 1 + l + sovComplianceInformation(uint64(l))
-	}
-	if m.CDVersionNumber != 0 {
-		n += 1 + sovComplianceInformation(uint64(m.CDVersionNumber))
-	}
-	if m.SoftwareVersionCertificationStatus != 0 {
-		n += 1 + sovComplianceInformation(uint64(m.SoftwareVersionCertificationStatus))
-	}
-	if len(m.History) > 0 {
-		for _, s := range m.History {
-			l = len(s)
-			n += 1 + l + sovComplianceInformation(uint64(l))
-		}
-	}
 	if m.Vid != 0 {
 		n += 1 + sovComplianceInformation(uint64(m.Vid))
 	}
@@ -271,6 +312,34 @@ func (m *ComplianceInformation) Size() (n int) {
 	l = len(m.CertificationType)
 	if l > 0 {
 		n += 1 + l + sovComplianceInformation(uint64(l))
+	}
+	l = len(m.SoftwareVersionString)
+	if l > 0 {
+		n += 1 + l + sovComplianceInformation(uint64(l))
+	}
+	if m.CDVersionNumber != 0 {
+		n += 1 + sovComplianceInformation(uint64(m.CDVersionNumber))
+	}
+	if m.SoftwareVersionCertificationStatus != 0 {
+		n += 1 + sovComplianceInformation(uint64(m.SoftwareVersionCertificationStatus))
+	}
+	l = len(m.Date)
+	if l > 0 {
+		n += 1 + l + sovComplianceInformation(uint64(l))
+	}
+	l = len(m.Reason)
+	if l > 0 {
+		n += 1 + l + sovComplianceInformation(uint64(l))
+	}
+	l = len(m.Owner)
+	if l > 0 {
+		n += 1 + l + sovComplianceInformation(uint64(l))
+	}
+	if len(m.History) > 0 {
+		for _, e := range m.History {
+			l = e.Size()
+			n += 1 + l + sovComplianceInformation(uint64(l))
+		}
 	}
 	return n
 }
@@ -311,6 +380,95 @@ func (m *ComplianceInformation) Unmarshal(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Vid", wireType)
+			}
+			m.Vid = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowComplianceInformation
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Vid |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pid", wireType)
+			}
+			m.Pid = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowComplianceInformation
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Pid |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SoftwareVersion", wireType)
+			}
+			m.SoftwareVersion = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowComplianceInformation
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SoftwareVersion |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CertificationType", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowComplianceInformation
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthComplianceInformation
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthComplianceInformation
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.CertificationType = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field SoftwareVersionString", wireType)
 			}
@@ -342,7 +500,7 @@ func (m *ComplianceInformation) Unmarshal(dAtA []byte) error {
 			}
 			m.SoftwareVersionString = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 2:
+		case 6:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field CDVersionNumber", wireType)
 			}
@@ -356,12 +514,12 @@ func (m *ComplianceInformation) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CDVersionNumber |= uint64(b&0x7F) << shift
+				m.CDVersionNumber |= uint32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-		case 3:
+		case 7:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field SoftwareVersionCertificationStatus", wireType)
 			}
@@ -375,103 +533,14 @@ func (m *ComplianceInformation) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.SoftwareVersionCertificationStatus |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field History", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComplianceInformation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthComplianceInformation
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthComplianceInformation
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.History = append(m.History, string(dAtA[iNdEx:postIndex]))
-			iNdEx = postIndex
-		case 5:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Vid", wireType)
-			}
-			m.Vid = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComplianceInformation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Vid |= int32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 6:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pid", wireType)
-			}
-			m.Pid = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComplianceInformation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Pid |= int32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 7:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field SoftwareVersion", wireType)
-			}
-			m.SoftwareVersion = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComplianceInformation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.SoftwareVersion |= uint64(b&0x7F) << shift
+				m.SoftwareVersionCertificationStatus |= uint32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 		case 8:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CertificationType", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Date", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -499,7 +568,105 @@ func (m *ComplianceInformation) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.CertificationType = string(dAtA[iNdEx:postIndex])
+			m.Date = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Reason", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowComplianceInformation
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthComplianceInformation
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthComplianceInformation
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Reason = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Owner", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowComplianceInformation
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthComplianceInformation
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthComplianceInformation
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Owner = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 11:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field History", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowComplianceInformation
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthComplianceInformation
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthComplianceInformation
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.History = append(m.History, &ComplianceHistoryItem{})
+			if err := m.History[len(m.History)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

@@ -1,14 +1,18 @@
+import { ComplianceHistoryItem } from '../compliance/compliance_history_item';
 import { Writer, Reader } from 'protobufjs/minimal';
 export declare const protobufPackage = "zigbeealliance.distributedcomplianceledger.compliance";
 export interface ComplianceInformation {
-    softwareVersionString: string;
-    cDVersionNumber: number;
-    softwareVersionCertificationStatus: number;
-    history: string[];
     vid: number;
     pid: number;
     softwareVersion: number;
     certificationType: string;
+    softwareVersionString: string;
+    cDVersionNumber: number;
+    softwareVersionCertificationStatus: number;
+    date: string;
+    reason: string;
+    owner: string;
+    history: ComplianceHistoryItem[];
 }
 export declare const ComplianceInformation: {
     encode(message: ComplianceInformation, writer?: Writer): Writer;

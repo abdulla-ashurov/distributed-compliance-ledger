@@ -1,11 +1,11 @@
 /* eslint-disable */
 import { Writer, Reader } from 'protobufjs/minimal';
 export const protobufPackage = 'zigbeealliance.distributedcomplianceledger.compliance';
-const baseDeviceSoftwareCompliance = { cDCertificateID: '', complianceInformation: '' };
+const baseDeviceSoftwareCompliance = { CDCertificateID: '', complianceInformation: '' };
 export const DeviceSoftwareCompliance = {
     encode(message, writer = Writer.create()) {
-        if (message.cDCertificateID !== '') {
-            writer.uint32(10).string(message.cDCertificateID);
+        if (message.CDCertificateID !== '') {
+            writer.uint32(10).string(message.CDCertificateID);
         }
         for (const v of message.complianceInformation) {
             writer.uint32(18).string(v);
@@ -21,7 +21,7 @@ export const DeviceSoftwareCompliance = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.cDCertificateID = reader.string();
+                    message.CDCertificateID = reader.string();
                     break;
                 case 2:
                     message.complianceInformation.push(reader.string());
@@ -36,11 +36,11 @@ export const DeviceSoftwareCompliance = {
     fromJSON(object) {
         const message = { ...baseDeviceSoftwareCompliance };
         message.complianceInformation = [];
-        if (object.cDCertificateID !== undefined && object.cDCertificateID !== null) {
-            message.cDCertificateID = String(object.cDCertificateID);
+        if (object.CDCertificateID !== undefined && object.CDCertificateID !== null) {
+            message.CDCertificateID = String(object.CDCertificateID);
         }
         else {
-            message.cDCertificateID = '';
+            message.CDCertificateID = '';
         }
         if (object.complianceInformation !== undefined && object.complianceInformation !== null) {
             for (const e of object.complianceInformation) {
@@ -51,7 +51,7 @@ export const DeviceSoftwareCompliance = {
     },
     toJSON(message) {
         const obj = {};
-        message.cDCertificateID !== undefined && (obj.cDCertificateID = message.cDCertificateID);
+        message.CDCertificateID !== undefined && (obj.CDCertificateID = message.CDCertificateID);
         if (message.complianceInformation) {
             obj.complianceInformation = message.complianceInformation.map((e) => e);
         }
@@ -63,11 +63,11 @@ export const DeviceSoftwareCompliance = {
     fromPartial(object) {
         const message = { ...baseDeviceSoftwareCompliance };
         message.complianceInformation = [];
-        if (object.cDCertificateID !== undefined && object.cDCertificateID !== null) {
-            message.cDCertificateID = object.cDCertificateID;
+        if (object.CDCertificateID !== undefined && object.CDCertificateID !== null) {
+            message.CDCertificateID = object.CDCertificateID;
         }
         else {
-            message.cDCertificateID = '';
+            message.CDCertificateID = '';
         }
         if (object.complianceInformation !== undefined && object.complianceInformation !== null) {
             for (const e of object.complianceInformation) {
