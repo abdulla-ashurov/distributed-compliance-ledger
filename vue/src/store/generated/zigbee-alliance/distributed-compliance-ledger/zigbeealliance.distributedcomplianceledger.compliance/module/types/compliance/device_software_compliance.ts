@@ -1,14 +1,15 @@
 /* eslint-disable */
+import { ComplianceInformation } from '../compliance/compliance_information'
 import { Writer, Reader } from 'protobufjs/minimal'
 
 export const protobufPackage = 'zigbeealliance.distributedcomplianceledger.compliance'
 
 export interface DeviceSoftwareCompliance {
   CDCertificateID: string
-  complianceInformation: string[]
+  complianceInformation: ComplianceInformation[]
 }
 
-const baseDeviceSoftwareCompliance: object = { CDCertificateID: '', complianceInformation: '' }
+const baseDeviceSoftwareCompliance: object = { CDCertificateID: '' }
 
 export const DeviceSoftwareCompliance = {
   encode(message: DeviceSoftwareCompliance, writer: Writer = Writer.create()): Writer {
@@ -16,7 +17,7 @@ export const DeviceSoftwareCompliance = {
       writer.uint32(10).string(message.CDCertificateID)
     }
     for (const v of message.complianceInformation) {
-      writer.uint32(18).string(v!)
+      ComplianceInformation.encode(v!, writer.uint32(18).fork()).ldelim()
     }
     return writer
   },
@@ -33,7 +34,7 @@ export const DeviceSoftwareCompliance = {
           message.CDCertificateID = reader.string()
           break
         case 2:
-          message.complianceInformation.push(reader.string())
+          message.complianceInformation.push(ComplianceInformation.decode(reader, reader.uint32()))
           break
         default:
           reader.skipType(tag & 7)
@@ -53,7 +54,7 @@ export const DeviceSoftwareCompliance = {
     }
     if (object.complianceInformation !== undefined && object.complianceInformation !== null) {
       for (const e of object.complianceInformation) {
-        message.complianceInformation.push(String(e))
+        message.complianceInformation.push(ComplianceInformation.fromJSON(e))
       }
     }
     return message
@@ -63,7 +64,7 @@ export const DeviceSoftwareCompliance = {
     const obj: any = {}
     message.CDCertificateID !== undefined && (obj.CDCertificateID = message.CDCertificateID)
     if (message.complianceInformation) {
-      obj.complianceInformation = message.complianceInformation.map((e) => e)
+      obj.complianceInformation = message.complianceInformation.map((e) => (e ? ComplianceInformation.toJSON(e) : undefined))
     } else {
       obj.complianceInformation = []
     }
@@ -80,7 +81,7 @@ export const DeviceSoftwareCompliance = {
     }
     if (object.complianceInformation !== undefined && object.complianceInformation !== null) {
       for (const e of object.complianceInformation) {
-        message.complianceInformation.push(e)
+        message.complianceInformation.push(ComplianceInformation.fromPartial(e))
       }
     }
     return message

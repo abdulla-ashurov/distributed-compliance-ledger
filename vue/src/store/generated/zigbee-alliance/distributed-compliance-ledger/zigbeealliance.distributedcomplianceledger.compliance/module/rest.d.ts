@@ -34,9 +34,27 @@ export interface ComplianceComplianceInfo {
     owner?: string;
     history?: ComplianceComplianceHistoryItem[];
 }
+export interface ComplianceComplianceInformation {
+    /** @format int32 */
+    vid?: number;
+    /** @format int32 */
+    pid?: number;
+    /** @format int64 */
+    softwareVersion?: number;
+    certificationType?: string;
+    softwareVersionString?: string;
+    /** @format int64 */
+    cDVersionNumber?: number;
+    /** @format int64 */
+    softwareVersionCertificationStatus?: number;
+    date?: string;
+    reason?: string;
+    owner?: string;
+    history?: ComplianceComplianceHistoryItem[];
+}
 export interface ComplianceDeviceSoftwareCompliance {
     CDCertificateID?: string;
-    complianceInformation?: string[];
+    complianceInformation?: ComplianceComplianceInformation[];
 }
 export declare type ComplianceMsgCertifyModelResponse = object;
 export declare type ComplianceMsgProvisionModelResponse = object;
