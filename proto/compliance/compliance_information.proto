@@ -7,6 +7,6 @@ message ComplianceInformation {
   
   int32 vid = 1; 
   int32 pid = 2; 
-  uint64 softwareVersion = 3; 
+  uint32 softwareVersion = 3; 
   string certificationType = 4; 
 }
