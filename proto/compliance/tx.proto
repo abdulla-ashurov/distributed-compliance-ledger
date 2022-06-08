@@ -26,6 +26,7 @@ message MsgCertifyModel {
   string certificationDate = 7 [(gogoproto.moretags) = "validate:\"required\""];
   string certificationType = 8 [(gogoproto.moretags) = "validate:\"required,max=100\""];
   string reason = 9 [(gogoproto.moretags) = "validate:\"max=102400\""];
+  string CDCertificateID = 10 [(gogoproto.moretags) = "validate:\"max=19\""];
 }
 
 message MsgCertifyModelResponse {
