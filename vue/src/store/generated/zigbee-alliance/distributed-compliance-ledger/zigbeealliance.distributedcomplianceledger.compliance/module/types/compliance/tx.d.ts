@@ -10,6 +10,7 @@ export interface MsgCertifyModel {
     certificationDate: string;
     certificationType: string;
     reason: string;
+    CDCertificateID: string;
 }
 export interface MsgCertifyModelResponse {
 }

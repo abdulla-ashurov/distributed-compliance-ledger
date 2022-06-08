@@ -13,6 +13,7 @@ export interface MsgCertifyModel {
   certificationDate: string
   certificationType: string
   reason: string
+  CDCertificateID: string
 }
 
 export interface MsgCertifyModelResponse {}
@@ -54,7 +55,8 @@ const baseMsgCertifyModel: object = {
   cDVersionNumber: 0,
   certificationDate: '',
   certificationType: '',
-  reason: ''
+  reason: '',
+  CDCertificateID: ''
 }
 
 export const MsgCertifyModel = {
@@ -85,6 +87,9 @@ export const MsgCertifyModel = {
     }
     if (message.reason !== '') {
       writer.uint32(74).string(message.reason)
+    }
+    if (message.CDCertificateID !== '') {
+      writer.uint32(82).string(message.CDCertificateID)
     }
     return writer
   },
@@ -122,6 +127,9 @@ export const MsgCertifyModel = {
           break
         case 9:
           message.reason = reader.string()
+          break
+        case 10:
+          message.CDCertificateID = reader.string()
           break
         default:
           reader.skipType(tag & 7)
@@ -178,6 +186,11 @@ export const MsgCertifyModel = {
     } else {
       message.reason = ''
     }
+    if (object.CDCertificateID !== undefined && object.CDCertificateID !== null) {
+      message.CDCertificateID = String(object.CDCertificateID)
+    } else {
+      message.CDCertificateID = ''
+    }
     return message
   },
 
@@ -192,6 +205,7 @@ export const MsgCertifyModel = {
     message.certificationDate !== undefined && (obj.certificationDate = message.certificationDate)
     message.certificationType !== undefined && (obj.certificationType = message.certificationType)
     message.reason !== undefined && (obj.reason = message.reason)
+    message.CDCertificateID !== undefined && (obj.CDCertificateID = message.CDCertificateID)
     return obj
   },
 
@@ -241,6 +255,11 @@ export const MsgCertifyModel = {
       message.reason = object.reason
     } else {
       message.reason = ''
+    }
+    if (object.CDCertificateID !== undefined && object.CDCertificateID !== null) {
+      message.CDCertificateID = object.CDCertificateID
+    } else {
+      message.CDCertificateID = ''
     }
     return message
   }
