@@ -60,11 +60,6 @@ service Query {
 		option (google.api.http).get = "/dcl/compliance/device-software-compliance/{CDCertificateID}";
 	}
 
-	// Queries a list of DeviceSoftwareCompliance items.
-	rpc DeviceSoftwareComplianceAll(QueryAllDeviceSoftwareComplianceRequest) returns (QueryAllDeviceSoftwareComplianceResponse) {
-		option (google.api.http).get = "/dcl/compliance/device-software-compliance";
-	}
-
 // this line is used by starport scaffolding # 2
 }
 
@@ -158,16 +153,7 @@ message QueryGetDeviceSoftwareComplianceRequest {
 }
 
 message QueryGetDeviceSoftwareComplianceResponse {
-	DeviceSoftwareCompliance deviceSoftwareCompliance = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryAllDeviceSoftwareComplianceRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllDeviceSoftwareComplianceResponse {
-	repeated DeviceSoftwareCompliance deviceSoftwareCompliance = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+	ComplianceInfo complianceInfo = 1 [(gogoproto.nullable) = false];
 }
 
 // this line is used by starport scaffolding # 3
