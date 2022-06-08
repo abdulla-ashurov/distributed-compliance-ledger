@@ -1,8 +1,9 @@
+import { ComplianceInformation } from '../compliance/compliance_information';
 import { Writer, Reader } from 'protobufjs/minimal';
 export declare const protobufPackage = "zigbeealliance.distributedcomplianceledger.compliance";
 export interface DeviceSoftwareCompliance {
-    cDCertificateID: string;
-    complianceInformation: string[];
+    CDCertificateID: string;
+    complianceInformation: ComplianceInformation[];
 }
 export declare const DeviceSoftwareCompliance: {
     encode(message: DeviceSoftwareCompliance, writer?: Writer): Writer;

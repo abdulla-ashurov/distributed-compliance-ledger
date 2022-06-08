@@ -668,15 +668,15 @@ func request_Query_DeviceSoftwareCompliance_0(ctx context.Context, marshaler run
 		_   = err
 	)
 
-	val, ok = pathParams["cDCertificateID"]
+	val, ok = pathParams["CDCertificateID"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "cDCertificateID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "CDCertificateID")
 	}
 
 	protoReq.CDCertificateID, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cDCertificateID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "CDCertificateID", err)
 	}
 
 	msg, err := client.DeviceSoftwareCompliance(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -695,15 +695,15 @@ func local_request_Query_DeviceSoftwareCompliance_0(ctx context.Context, marshal
 		_   = err
 	)
 
-	val, ok = pathParams["cDCertificateID"]
+	val, ok = pathParams["CDCertificateID"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "cDCertificateID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "CDCertificateID")
 	}
 
 	protoReq.CDCertificateID, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "cDCertificateID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "CDCertificateID", err)
 	}
 
 	msg, err := server.DeviceSoftwareCompliance(ctx, &protoReq)
@@ -1244,9 +1244,9 @@ var (
 
 	pattern_Query_ProvisionalModelAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"dcl", "compliance", "provisional-models"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_DeviceSoftwareCompliance_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"zigbee-alliance", "distributedcomplianceledger", "compliance", "device_software_compliance", "cDCertificateID"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_DeviceSoftwareCompliance_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"dcl", "compliance", "device-software-compliance", "CDCertificateID"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_DeviceSoftwareComplianceAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"zigbee-alliance", "distributedcomplianceledger", "compliance", "device_software_compliance"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_DeviceSoftwareComplianceAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"dcl", "compliance", "device-software-compliance"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

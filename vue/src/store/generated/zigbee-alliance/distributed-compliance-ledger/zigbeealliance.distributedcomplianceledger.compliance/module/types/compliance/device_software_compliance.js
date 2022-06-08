@@ -1,14 +1,15 @@
 /* eslint-disable */
+import { ComplianceInformation } from '../compliance/compliance_information';
 import { Writer, Reader } from 'protobufjs/minimal';
 export const protobufPackage = 'zigbeealliance.distributedcomplianceledger.compliance';
-const baseDeviceSoftwareCompliance = { cDCertificateID: '', complianceInformation: '' };
+const baseDeviceSoftwareCompliance = { CDCertificateID: '' };
 export const DeviceSoftwareCompliance = {
     encode(message, writer = Writer.create()) {
-        if (message.cDCertificateID !== '') {
-            writer.uint32(10).string(message.cDCertificateID);
+        if (message.CDCertificateID !== '') {
+            writer.uint32(10).string(message.CDCertificateID);
         }
         for (const v of message.complianceInformation) {
-            writer.uint32(18).string(v);
+            ComplianceInformation.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
@@ -21,10 +22,10 @@ export const DeviceSoftwareCompliance = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.cDCertificateID = reader.string();
+                    message.CDCertificateID = reader.string();
                     break;
                 case 2:
-                    message.complianceInformation.push(reader.string());
+                    message.complianceInformation.push(ComplianceInformation.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -36,24 +37,24 @@ export const DeviceSoftwareCompliance = {
     fromJSON(object) {
         const message = { ...baseDeviceSoftwareCompliance };
         message.complianceInformation = [];
-        if (object.cDCertificateID !== undefined && object.cDCertificateID !== null) {
-            message.cDCertificateID = String(object.cDCertificateID);
+        if (object.CDCertificateID !== undefined && object.CDCertificateID !== null) {
+            message.CDCertificateID = String(object.CDCertificateID);
         }
         else {
-            message.cDCertificateID = '';
+            message.CDCertificateID = '';
         }
         if (object.complianceInformation !== undefined && object.complianceInformation !== null) {
             for (const e of object.complianceInformation) {
-                message.complianceInformation.push(String(e));
+                message.complianceInformation.push(ComplianceInformation.fromJSON(e));
             }
         }
         return message;
     },
     toJSON(message) {
         const obj = {};
-        message.cDCertificateID !== undefined && (obj.cDCertificateID = message.cDCertificateID);
+        message.CDCertificateID !== undefined && (obj.CDCertificateID = message.CDCertificateID);
         if (message.complianceInformation) {
-            obj.complianceInformation = message.complianceInformation.map((e) => e);
+            obj.complianceInformation = message.complianceInformation.map((e) => (e ? ComplianceInformation.toJSON(e) : undefined));
         }
         else {
             obj.complianceInformation = [];
@@ -63,15 +64,15 @@ export const DeviceSoftwareCompliance = {
     fromPartial(object) {
         const message = { ...baseDeviceSoftwareCompliance };
         message.complianceInformation = [];
-        if (object.cDCertificateID !== undefined && object.cDCertificateID !== null) {
-            message.cDCertificateID = object.cDCertificateID;
+        if (object.CDCertificateID !== undefined && object.CDCertificateID !== null) {
+            message.CDCertificateID = object.CDCertificateID;
         }
         else {
-            message.cDCertificateID = '';
+            message.CDCertificateID = '';
         }
         if (object.complianceInformation !== undefined && object.complianceInformation !== null) {
             for (const e of object.complianceInformation) {
-                message.complianceInformation.push(e);
+                message.complianceInformation.push(ComplianceInformation.fromPartial(e));
             }
         }
         return message;

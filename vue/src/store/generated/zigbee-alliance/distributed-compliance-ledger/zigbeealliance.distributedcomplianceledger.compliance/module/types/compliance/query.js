@@ -1151,11 +1151,11 @@ export const QueryAllProvisionalModelResponse = {
         return message;
     }
 };
-const baseQueryGetDeviceSoftwareComplianceRequest = { cDCertificateID: '' };
+const baseQueryGetDeviceSoftwareComplianceRequest = { CDCertificateID: '' };
 export const QueryGetDeviceSoftwareComplianceRequest = {
     encode(message, writer = Writer.create()) {
-        if (message.cDCertificateID !== '') {
-            writer.uint32(10).string(message.cDCertificateID);
+        if (message.CDCertificateID !== '') {
+            writer.uint32(10).string(message.CDCertificateID);
         }
         return writer;
     },
@@ -1167,7 +1167,7 @@ export const QueryGetDeviceSoftwareComplianceRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.cDCertificateID = reader.string();
+                    message.CDCertificateID = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1178,26 +1178,26 @@ export const QueryGetDeviceSoftwareComplianceRequest = {
     },
     fromJSON(object) {
         const message = { ...baseQueryGetDeviceSoftwareComplianceRequest };
-        if (object.cDCertificateID !== undefined && object.cDCertificateID !== null) {
-            message.cDCertificateID = String(object.cDCertificateID);
+        if (object.CDCertificateID !== undefined && object.CDCertificateID !== null) {
+            message.CDCertificateID = String(object.CDCertificateID);
         }
         else {
-            message.cDCertificateID = '';
+            message.CDCertificateID = '';
         }
         return message;
     },
     toJSON(message) {
         const obj = {};
-        message.cDCertificateID !== undefined && (obj.cDCertificateID = message.cDCertificateID);
+        message.CDCertificateID !== undefined && (obj.CDCertificateID = message.CDCertificateID);
         return obj;
     },
     fromPartial(object) {
         const message = { ...baseQueryGetDeviceSoftwareComplianceRequest };
-        if (object.cDCertificateID !== undefined && object.cDCertificateID !== null) {
-            message.cDCertificateID = object.cDCertificateID;
+        if (object.CDCertificateID !== undefined && object.CDCertificateID !== null) {
+            message.CDCertificateID = object.CDCertificateID;
         }
         else {
-            message.cDCertificateID = '';
+            message.CDCertificateID = '';
         }
         return message;
     }
