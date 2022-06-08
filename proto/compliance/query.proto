@@ -57,7 +57,7 @@ service Query {
 
 // Queries a DeviceSoftwareCompliance by index.
 	rpc DeviceSoftwareCompliance(QueryGetDeviceSoftwareComplianceRequest) returns (QueryGetDeviceSoftwareComplianceResponse) {
-		option (google.api.http).get = "/dcl/compliance/device-software-compliance/{cDCertificateID}";
+		option (google.api.http).get = "/dcl/compliance/device-software-compliance/{CDCertificateID}";
 	}
 
 	// Queries a list of DeviceSoftwareCompliance items.
