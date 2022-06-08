@@ -55,6 +55,11 @@ export interface ComplianceComplianceInfo {
   history?: ComplianceComplianceHistoryItem[];
 }
 
+export interface ComplianceDeviceSoftwareCompliance {
+  cDCertificateID?: string;
+  complianceInformation?: string[];
+}
+
 export type ComplianceMsgCertifyModelResponse = object;
 
 export type ComplianceMsgProvisionModelResponse = object;
@@ -104,6 +109,21 @@ export interface ComplianceQueryAllComplianceInfoResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface ComplianceQueryAllDeviceSoftwareComplianceResponse {
+  deviceSoftwareCompliance?: ComplianceDeviceSoftwareCompliance[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface ComplianceQueryAllProvisionalModelResponse {
   provisionalModel?: ComplianceProvisionalModel[];
 
@@ -140,6 +160,10 @@ export interface ComplianceQueryGetCertifiedModelResponse {
 
 export interface ComplianceQueryGetComplianceInfoResponse {
   complianceInfo?: ComplianceComplianceInfo;
+}
+
+export interface ComplianceQueryGetDeviceSoftwareComplianceResponse {
+  deviceSoftwareCompliance?: ComplianceDeviceSoftwareCompliance;
 }
 
 export interface ComplianceQueryGetProvisionalModelResponse {
@@ -620,6 +644,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   ) =>
     this.request<ComplianceQueryGetRevokedModelResponse, RpcStatus>({
       path: `/dcl/compliance/revoked-models/${vid}/${pid}/${softwareVersion}/${certificationType}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryDeviceSoftwareComplianceAll
+   * @summary Queries a list of DeviceSoftwareCompliance items.
+   * @request GET:/zigbee-alliance/distributedcomplianceledger/compliance/device_software_compliance
+   */
+  queryDeviceSoftwareComplianceAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.countTotal"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<ComplianceQueryAllDeviceSoftwareComplianceResponse, RpcStatus>({
+      path: `/zigbee-alliance/distributedcomplianceledger/compliance/device_software_compliance`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryDeviceSoftwareCompliance
+   * @summary Queries a DeviceSoftwareCompliance by index.
+   * @request GET:/zigbee-alliance/distributedcomplianceledger/compliance/device_software_compliance/{cDCertificateID}
+   */
+  queryDeviceSoftwareCompliance = (cDCertificateID: string, params: RequestParams = {}) =>
+    this.request<ComplianceQueryGetDeviceSoftwareComplianceResponse, RpcStatus>({
+      path: `/zigbee-alliance/distributedcomplianceledger/compliance/device_software_compliance/${cDCertificateID}`,
       method: "GET",
       format: "json",
       ...params,

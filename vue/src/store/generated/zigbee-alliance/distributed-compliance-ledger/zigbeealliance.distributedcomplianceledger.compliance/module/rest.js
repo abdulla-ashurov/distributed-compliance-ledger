@@ -252,5 +252,34 @@ export class Api extends HttpClient {
             format: "json",
             ...params,
         });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryDeviceSoftwareComplianceAll
+         * @summary Queries a list of DeviceSoftwareCompliance items.
+         * @request GET:/zigbee-alliance/distributedcomplianceledger/compliance/device_software_compliance
+         */
+        this.queryDeviceSoftwareComplianceAll = (query, params = {}) => this.request({
+            path: `/zigbee-alliance/distributedcomplianceledger/compliance/device_software_compliance`,
+            method: "GET",
+            query: query,
+            format: "json",
+            ...params,
+        });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryDeviceSoftwareCompliance
+         * @summary Queries a DeviceSoftwareCompliance by index.
+         * @request GET:/zigbee-alliance/distributedcomplianceledger/compliance/device_software_compliance/{cDCertificateID}
+         */
+        this.queryDeviceSoftwareCompliance = (cDCertificateID, params = {}) => this.request({
+            path: `/zigbee-alliance/distributedcomplianceledger/compliance/device_software_compliance/${cDCertificateID}`,
+            method: "GET",
+            format: "json",
+            ...params,
+        });
     }
 }
