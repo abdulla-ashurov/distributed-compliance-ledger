@@ -3,9 +3,11 @@ package zigbeealliance.distributedcomplianceledger.compliance;
 
 option go_package = "github.com/zigbee-alliance/distributed-compliance-ledger/x/compliance/types";
 
+import "compliance/compliance_information.proto";
+
 message DeviceSoftwareCompliance {
   string CDCertificateID = 1; 
-  repeated string complianceInformation = 2; 
+  repeated ComplianceInformation complianceInformation = 2; 
   
 }
 
