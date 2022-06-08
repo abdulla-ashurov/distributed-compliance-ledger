@@ -35,19 +35,6 @@ export interface ComplianceComplianceInfo {
     history?: ComplianceComplianceHistoryItem[];
     CDCertificateID?: string;
 }
-export interface ComplianceComplianceInformation {
-    /** @format int32 */
-    vid?: number;
-    /** @format int32 */
-    pid?: number;
-    /** @format uint64 */
-    softwareVersion?: string;
-    certificationType?: string;
-}
-export interface ComplianceDeviceSoftwareCompliance {
-    CDCertificateID?: string;
-    complianceInformation?: ComplianceComplianceInformation[];
-}
 export declare type ComplianceMsgCertifyModelResponse = object;
 export declare type ComplianceMsgProvisionModelResponse = object;
 export declare type ComplianceMsgRevokeModelResponse = object;
@@ -76,19 +63,6 @@ export interface ComplianceQueryAllCertifiedModelResponse {
 }
 export interface ComplianceQueryAllComplianceInfoResponse {
     complianceInfo?: ComplianceComplianceInfo[];
-    /**
-     * PageResponse is to be embedded in gRPC response messages where the
-     * corresponding request message has used PageRequest.
-     *
-     *  message SomeResponse {
-     *          repeated Bar results = 1;
-     *          PageResponse page = 2;
-     *  }
-     */
-    pagination?: V1Beta1PageResponse;
-}
-export interface ComplianceQueryAllDeviceSoftwareComplianceResponse {
-    deviceSoftwareCompliance?: ComplianceDeviceSoftwareCompliance[];
     /**
      * PageResponse is to be embedded in gRPC response messages where the
      * corresponding request message has used PageRequest.
@@ -133,7 +107,7 @@ export interface ComplianceQueryGetComplianceInfoResponse {
     complianceInfo?: ComplianceComplianceInfo;
 }
 export interface ComplianceQueryGetDeviceSoftwareComplianceResponse {
-    deviceSoftwareCompliance?: ComplianceDeviceSoftwareCompliance;
+    complianceInfo?: ComplianceComplianceInfo;
 }
 export interface ComplianceQueryGetProvisionalModelResponse {
     provisionalModel?: ComplianceProvisionalModel;
@@ -322,21 +296,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @request GET:/dcl/compliance/compliance-info/{vid}/{pid}/{softwareVersion}/{certificationType}
      */
     queryComplianceInfo: (vid: number, pid: number, softwareVersion: number, certificationType: string, params?: RequestParams) => Promise<HttpResponse<ComplianceQueryGetComplianceInfoResponse, RpcStatus>>;
-    /**
-     * No description
-     *
-     * @tags Query
-     * @name QueryDeviceSoftwareComplianceAll
-     * @summary Queries a list of DeviceSoftwareCompliance items.
-     * @request GET:/dcl/compliance/device-software-compliance
-     */
-    queryDeviceSoftwareComplianceAll: (query?: {
-        "pagination.key"?: string;
-        "pagination.offset"?: string;
-        "pagination.limit"?: string;
-        "pagination.countTotal"?: boolean;
-        "pagination.reverse"?: boolean;
-    }, params?: RequestParams) => Promise<HttpResponse<ComplianceQueryAllDeviceSoftwareComplianceResponse, RpcStatus>>;
     /**
      * No description
      *

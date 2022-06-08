@@ -5,7 +5,6 @@ import { PageRequest, PageResponse } from '../cosmos/base/query/v1beta1/paginati
 import { CertifiedModel } from '../compliance/certified_model'
 import { RevokedModel } from '../compliance/revoked_model'
 import { ProvisionalModel } from '../compliance/provisional_model'
-import { DeviceSoftwareCompliance } from '../compliance/device_software_compliance'
 
 export const protobufPackage = 'zigbeealliance.distributedcomplianceledger.compliance'
 
@@ -94,16 +93,7 @@ export interface QueryGetDeviceSoftwareComplianceRequest {
 }
 
 export interface QueryGetDeviceSoftwareComplianceResponse {
-  deviceSoftwareCompliance: DeviceSoftwareCompliance | undefined
-}
-
-export interface QueryAllDeviceSoftwareComplianceRequest {
-  pagination: PageRequest | undefined
-}
-
-export interface QueryAllDeviceSoftwareComplianceResponse {
-  deviceSoftwareCompliance: DeviceSoftwareCompliance[]
-  pagination: PageResponse | undefined
+  complianceInfo: ComplianceInfo | undefined
 }
 
 const baseQueryGetComplianceInfoRequest: object = { vid: 0, pid: 0, softwareVersion: 0, certificationType: '' }
@@ -1345,8 +1335,8 @@ const baseQueryGetDeviceSoftwareComplianceResponse: object = {}
 
 export const QueryGetDeviceSoftwareComplianceResponse = {
   encode(message: QueryGetDeviceSoftwareComplianceResponse, writer: Writer = Writer.create()): Writer {
-    if (message.deviceSoftwareCompliance !== undefined) {
-      DeviceSoftwareCompliance.encode(message.deviceSoftwareCompliance, writer.uint32(10).fork()).ldelim()
+    if (message.complianceInfo !== undefined) {
+      ComplianceInfo.encode(message.complianceInfo, writer.uint32(10).fork()).ldelim()
     }
     return writer
   },
@@ -1359,7 +1349,7 @@ export const QueryGetDeviceSoftwareComplianceResponse = {
       const tag = reader.uint32()
       switch (tag >>> 3) {
         case 1:
-          message.deviceSoftwareCompliance = DeviceSoftwareCompliance.decode(reader, reader.uint32())
+          message.complianceInfo = ComplianceInfo.decode(reader, reader.uint32())
           break
         default:
           reader.skipType(tag & 7)
@@ -1371,161 +1361,26 @@ export const QueryGetDeviceSoftwareComplianceResponse = {
 
   fromJSON(object: any): QueryGetDeviceSoftwareComplianceResponse {
     const message = { ...baseQueryGetDeviceSoftwareComplianceResponse } as QueryGetDeviceSoftwareComplianceResponse
-    if (object.deviceSoftwareCompliance !== undefined && object.deviceSoftwareCompliance !== null) {
-      message.deviceSoftwareCompliance = DeviceSoftwareCompliance.fromJSON(object.deviceSoftwareCompliance)
+    if (object.complianceInfo !== undefined && object.complianceInfo !== null) {
+      message.complianceInfo = ComplianceInfo.fromJSON(object.complianceInfo)
     } else {
-      message.deviceSoftwareCompliance = undefined
+      message.complianceInfo = undefined
     }
     return message
   },
 
   toJSON(message: QueryGetDeviceSoftwareComplianceResponse): unknown {
     const obj: any = {}
-    message.deviceSoftwareCompliance !== undefined &&
-      (obj.deviceSoftwareCompliance = message.deviceSoftwareCompliance ? DeviceSoftwareCompliance.toJSON(message.deviceSoftwareCompliance) : undefined)
+    message.complianceInfo !== undefined && (obj.complianceInfo = message.complianceInfo ? ComplianceInfo.toJSON(message.complianceInfo) : undefined)
     return obj
   },
 
   fromPartial(object: DeepPartial<QueryGetDeviceSoftwareComplianceResponse>): QueryGetDeviceSoftwareComplianceResponse {
     const message = { ...baseQueryGetDeviceSoftwareComplianceResponse } as QueryGetDeviceSoftwareComplianceResponse
-    if (object.deviceSoftwareCompliance !== undefined && object.deviceSoftwareCompliance !== null) {
-      message.deviceSoftwareCompliance = DeviceSoftwareCompliance.fromPartial(object.deviceSoftwareCompliance)
+    if (object.complianceInfo !== undefined && object.complianceInfo !== null) {
+      message.complianceInfo = ComplianceInfo.fromPartial(object.complianceInfo)
     } else {
-      message.deviceSoftwareCompliance = undefined
-    }
-    return message
-  }
-}
-
-const baseQueryAllDeviceSoftwareComplianceRequest: object = {}
-
-export const QueryAllDeviceSoftwareComplianceRequest = {
-  encode(message: QueryAllDeviceSoftwareComplianceRequest, writer: Writer = Writer.create()): Writer {
-    if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim()
-    }
-    return writer
-  },
-
-  decode(input: Reader | Uint8Array, length?: number): QueryAllDeviceSoftwareComplianceRequest {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input
-    let end = length === undefined ? reader.len : reader.pos + length
-    const message = { ...baseQueryAllDeviceSoftwareComplianceRequest } as QueryAllDeviceSoftwareComplianceRequest
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32())
-          break
-        default:
-          reader.skipType(tag & 7)
-          break
-      }
-    }
-    return message
-  },
-
-  fromJSON(object: any): QueryAllDeviceSoftwareComplianceRequest {
-    const message = { ...baseQueryAllDeviceSoftwareComplianceRequest } as QueryAllDeviceSoftwareComplianceRequest
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromJSON(object.pagination)
-    } else {
-      message.pagination = undefined
-    }
-    return message
-  },
-
-  toJSON(message: QueryAllDeviceSoftwareComplianceRequest): unknown {
-    const obj: any = {}
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined)
-    return obj
-  },
-
-  fromPartial(object: DeepPartial<QueryAllDeviceSoftwareComplianceRequest>): QueryAllDeviceSoftwareComplianceRequest {
-    const message = { ...baseQueryAllDeviceSoftwareComplianceRequest } as QueryAllDeviceSoftwareComplianceRequest
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination)
-    } else {
-      message.pagination = undefined
-    }
-    return message
-  }
-}
-
-const baseQueryAllDeviceSoftwareComplianceResponse: object = {}
-
-export const QueryAllDeviceSoftwareComplianceResponse = {
-  encode(message: QueryAllDeviceSoftwareComplianceResponse, writer: Writer = Writer.create()): Writer {
-    for (const v of message.deviceSoftwareCompliance) {
-      DeviceSoftwareCompliance.encode(v!, writer.uint32(10).fork()).ldelim()
-    }
-    if (message.pagination !== undefined) {
-      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim()
-    }
-    return writer
-  },
-
-  decode(input: Reader | Uint8Array, length?: number): QueryAllDeviceSoftwareComplianceResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input
-    let end = length === undefined ? reader.len : reader.pos + length
-    const message = { ...baseQueryAllDeviceSoftwareComplianceResponse } as QueryAllDeviceSoftwareComplianceResponse
-    message.deviceSoftwareCompliance = []
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1:
-          message.deviceSoftwareCompliance.push(DeviceSoftwareCompliance.decode(reader, reader.uint32()))
-          break
-        case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32())
-          break
-        default:
-          reader.skipType(tag & 7)
-          break
-      }
-    }
-    return message
-  },
-
-  fromJSON(object: any): QueryAllDeviceSoftwareComplianceResponse {
-    const message = { ...baseQueryAllDeviceSoftwareComplianceResponse } as QueryAllDeviceSoftwareComplianceResponse
-    message.deviceSoftwareCompliance = []
-    if (object.deviceSoftwareCompliance !== undefined && object.deviceSoftwareCompliance !== null) {
-      for (const e of object.deviceSoftwareCompliance) {
-        message.deviceSoftwareCompliance.push(DeviceSoftwareCompliance.fromJSON(e))
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromJSON(object.pagination)
-    } else {
-      message.pagination = undefined
-    }
-    return message
-  },
-
-  toJSON(message: QueryAllDeviceSoftwareComplianceResponse): unknown {
-    const obj: any = {}
-    if (message.deviceSoftwareCompliance) {
-      obj.deviceSoftwareCompliance = message.deviceSoftwareCompliance.map((e) => (e ? DeviceSoftwareCompliance.toJSON(e) : undefined))
-    } else {
-      obj.deviceSoftwareCompliance = []
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined)
-    return obj
-  },
-
-  fromPartial(object: DeepPartial<QueryAllDeviceSoftwareComplianceResponse>): QueryAllDeviceSoftwareComplianceResponse {
-    const message = { ...baseQueryAllDeviceSoftwareComplianceResponse } as QueryAllDeviceSoftwareComplianceResponse
-    message.deviceSoftwareCompliance = []
-    if (object.deviceSoftwareCompliance !== undefined && object.deviceSoftwareCompliance !== null) {
-      for (const e of object.deviceSoftwareCompliance) {
-        message.deviceSoftwareCompliance.push(DeviceSoftwareCompliance.fromPartial(e))
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination)
-    } else {
-      message.pagination = undefined
+      message.complianceInfo = undefined
     }
     return message
   }
@@ -1551,8 +1406,6 @@ export interface Query {
   ProvisionalModelAll(request: QueryAllProvisionalModelRequest): Promise<QueryAllProvisionalModelResponse>
   /** Queries a DeviceSoftwareCompliance by index. */
   DeviceSoftwareCompliance(request: QueryGetDeviceSoftwareComplianceRequest): Promise<QueryGetDeviceSoftwareComplianceResponse>
-  /** Queries a list of DeviceSoftwareCompliance items. */
-  DeviceSoftwareComplianceAll(request: QueryAllDeviceSoftwareComplianceRequest): Promise<QueryAllDeviceSoftwareComplianceResponse>
 }
 
 export class QueryClientImpl implements Query {
@@ -1612,12 +1465,6 @@ export class QueryClientImpl implements Query {
     const data = QueryGetDeviceSoftwareComplianceRequest.encode(request).finish()
     const promise = this.rpc.request('zigbeealliance.distributedcomplianceledger.compliance.Query', 'DeviceSoftwareCompliance', data)
     return promise.then((data) => QueryGetDeviceSoftwareComplianceResponse.decode(new Reader(data)))
-  }
-
-  DeviceSoftwareComplianceAll(request: QueryAllDeviceSoftwareComplianceRequest): Promise<QueryAllDeviceSoftwareComplianceResponse> {
-    const data = QueryAllDeviceSoftwareComplianceRequest.encode(request).finish()
-    const promise = this.rpc.request('zigbeealliance.distributedcomplianceledger.compliance.Query', 'DeviceSoftwareComplianceAll', data)
-    return promise.then((data) => QueryAllDeviceSoftwareComplianceResponse.decode(new Reader(data)))
   }
 }
 

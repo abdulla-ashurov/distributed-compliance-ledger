@@ -56,23 +56,6 @@ export interface ComplianceComplianceInfo {
   CDCertificateID?: string;
 }
 
-export interface ComplianceComplianceInformation {
-  /** @format int32 */
-  vid?: number;
-
-  /** @format int32 */
-  pid?: number;
-
-  /** @format uint64 */
-  softwareVersion?: string;
-  certificationType?: string;
-}
-
-export interface ComplianceDeviceSoftwareCompliance {
-  CDCertificateID?: string;
-  complianceInformation?: ComplianceComplianceInformation[];
-}
-
 export type ComplianceMsgCertifyModelResponse = object;
 
 export type ComplianceMsgProvisionModelResponse = object;
@@ -109,21 +92,6 @@ export interface ComplianceQueryAllCertifiedModelResponse {
 
 export interface ComplianceQueryAllComplianceInfoResponse {
   complianceInfo?: ComplianceComplianceInfo[];
-
-  /**
-   * PageResponse is to be embedded in gRPC response messages where the
-   * corresponding request message has used PageRequest.
-   *
-   *  message SomeResponse {
-   *          repeated Bar results = 1;
-   *          PageResponse page = 2;
-   *  }
-   */
-  pagination?: V1Beta1PageResponse;
-}
-
-export interface ComplianceQueryAllDeviceSoftwareComplianceResponse {
-  deviceSoftwareCompliance?: ComplianceDeviceSoftwareCompliance[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -176,7 +144,7 @@ export interface ComplianceQueryGetComplianceInfoResponse {
 }
 
 export interface ComplianceQueryGetDeviceSoftwareComplianceResponse {
-  deviceSoftwareCompliance?: ComplianceDeviceSoftwareCompliance;
+  complianceInfo?: ComplianceComplianceInfo;
 }
 
 export interface ComplianceQueryGetProvisionalModelResponse {
@@ -562,32 +530,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     this.request<ComplianceQueryGetComplianceInfoResponse, RpcStatus>({
       path: `/dcl/compliance/compliance-info/${vid}/${pid}/${softwareVersion}/${certificationType}`,
       method: "GET",
-      format: "json",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Query
-   * @name QueryDeviceSoftwareComplianceAll
-   * @summary Queries a list of DeviceSoftwareCompliance items.
-   * @request GET:/dcl/compliance/device-software-compliance
-   */
-  queryDeviceSoftwareComplianceAll = (
-    query?: {
-      "pagination.key"?: string;
-      "pagination.offset"?: string;
-      "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
-      "pagination.reverse"?: boolean;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<ComplianceQueryAllDeviceSoftwareComplianceResponse, RpcStatus>({
-      path: `/dcl/compliance/device-software-compliance`,
-      method: "GET",
-      query: query,
       format: "json",
       ...params,
     });

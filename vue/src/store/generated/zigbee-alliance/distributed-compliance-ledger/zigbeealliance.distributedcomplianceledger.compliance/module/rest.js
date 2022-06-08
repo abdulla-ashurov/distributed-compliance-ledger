@@ -198,21 +198,6 @@ export class Api extends HttpClient {
          * No description
          *
          * @tags Query
-         * @name QueryDeviceSoftwareComplianceAll
-         * @summary Queries a list of DeviceSoftwareCompliance items.
-         * @request GET:/dcl/compliance/device-software-compliance
-         */
-        this.queryDeviceSoftwareComplianceAll = (query, params = {}) => this.request({
-            path: `/dcl/compliance/device-software-compliance`,
-            method: "GET",
-            query: query,
-            format: "json",
-            ...params,
-        });
-        /**
-         * No description
-         *
-         * @tags Query
          * @name QueryDeviceSoftwareCompliance
          * @summary Queries a DeviceSoftwareCompliance by index.
          * @request GET:/dcl/compliance/device-software-compliance/{CDCertificateID}
