@@ -23,6 +23,7 @@ func CmdCertifyModel() *cobra.Command {
 		certificationType     string
 		reason                string
 		cdVersionNumber       uint32
+		CDCertificateID       string
 	)
 
 	cmd := &cobra.Command{
@@ -45,6 +46,7 @@ func CmdCertifyModel() *cobra.Command {
 				certificationDate,
 				certificationType,
 				reason,
+				CDCertificateID,
 			)
 
 			// validate basic will be called in GenerateOrBroadcastTxCLI
@@ -71,13 +73,15 @@ func CmdCertifyModel() *cobra.Command {
 		"The date of model certification (rfc3339 encoded), for example 2019-10-12T07:20:50.52Z")
 	cmd.Flags().StringVar(&reason, FlagReason, "",
 		"Optional comment describing the reason of certification")
-
+	cmd.Flags().StringVar(&CDCertificateID, FlagCDCertificateID, "",
+		"CD Certificate ID of the certification (19 character max string)")
 	_ = cmd.MarkFlagRequired(FlagVID)
 	_ = cmd.MarkFlagRequired(FlagPID)
 	_ = cmd.MarkFlagRequired(FlagSoftwareVersion)
 	_ = cmd.MarkFlagRequired(FlagSoftwareVersionString)
 	_ = cmd.MarkFlagRequired(FlagCertificationType)
 	_ = cmd.MarkFlagRequired(FlagCertificationDate)
+	_ = cmd.MarkFlagRequired(FlagCDCertificateID)
 	_ = cmd.MarkFlagRequired(flags.FlagFrom)
 
 	cli.AddTxFlagsToCmd(cmd)
