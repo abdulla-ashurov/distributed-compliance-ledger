@@ -493,50 +493,52 @@ paths:
             type: object
             properties:
               complianceInfo:
-                type: object
-                properties:
-                  vid:
-                    type: integer
-                    format: int32
-                  pid:
-                    type: integer
-                    format: int32
-                  softwareVersion:
-                    type: integer
-                    format: int64
-                  certificationType:
-                    type: string
-                  softwareVersionString:
-                    type: string
-                  cDVersionNumber:
-                    type: integer
-                    format: int64
-                  softwareVersionCertificationStatus:
-                    type: integer
-                    format: int64
-                  date:
-                    type: string
-                  reason:
-                    type: string
-                  owner:
-                    type: string
-                  history:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        softwareVersionCertificationStatus:
-                          type: integer
-                          format: int64
-                        date:
-                          type: string
-                        reason:
-                          type: string
-                        cDVersionNumber:
-                          type: integer
-                          format: int64
-                  CDCertificateID:
-                    type: string
+                type: array
+                items:
+                  type: object
+                  properties:
+                    vid:
+                      type: integer
+                      format: int32
+                    pid:
+                      type: integer
+                      format: int32
+                    softwareVersion:
+                      type: integer
+                      format: int64
+                    certificationType:
+                      type: string
+                    softwareVersionString:
+                      type: string
+                    cDVersionNumber:
+                      type: integer
+                      format: int64
+                    softwareVersionCertificationStatus:
+                      type: integer
+                      format: int64
+                    date:
+                      type: string
+                    reason:
+                      type: string
+                    owner:
+                      type: string
+                    history:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          softwareVersionCertificationStatus:
+                            type: integer
+                            format: int64
+                          date:
+                            type: string
+                          reason:
+                            type: string
+                          cDVersionNumber:
+                            type: integer
+                            format: int64
+                    CDCertificateID:
+                      type: string
         default:
           description: An unexpected error response.
           schema:
@@ -14048,50 +14050,52 @@ definitions:
     type: object
     properties:
       complianceInfo:
-        type: object
-        properties:
-          vid:
-            type: integer
-            format: int32
-          pid:
-            type: integer
-            format: int32
-          softwareVersion:
-            type: integer
-            format: int64
-          certificationType:
-            type: string
-          softwareVersionString:
-            type: string
-          cDVersionNumber:
-            type: integer
-            format: int64
-          softwareVersionCertificationStatus:
-            type: integer
-            format: int64
-          date:
-            type: string
-          reason:
-            type: string
-          owner:
-            type: string
-          history:
-            type: array
-            items:
-              type: object
-              properties:
-                softwareVersionCertificationStatus:
-                  type: integer
-                  format: int64
-                date:
-                  type: string
-                reason:
-                  type: string
-                cDVersionNumber:
-                  type: integer
-                  format: int64
-          CDCertificateID:
-            type: string
+        type: array
+        items:
+          type: object
+          properties:
+            vid:
+              type: integer
+              format: int32
+            pid:
+              type: integer
+              format: int32
+            softwareVersion:
+              type: integer
+              format: int64
+            certificationType:
+              type: string
+            softwareVersionString:
+              type: string
+            cDVersionNumber:
+              type: integer
+              format: int64
+            softwareVersionCertificationStatus:
+              type: integer
+              format: int64
+            date:
+              type: string
+            reason:
+              type: string
+            owner:
+              type: string
+            history:
+              type: array
+              items:
+                type: object
+                properties:
+                  softwareVersionCertificationStatus:
+                    type: integer
+                    format: int64
+                  date:
+                    type: string
+                  reason:
+                    type: string
+                  cDVersionNumber:
+                    type: integer
+                    format: int64
+            CDCertificateID:
+              type: string
   zigbeealliance.distributedcomplianceledger.compliance.QueryGetProvisionalModelResponse:
     type: object
     properties:
