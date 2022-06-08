@@ -2,6 +2,7 @@
 
 #    plain ones
 starport scaffold --module compliance type ComplianceHistoryItem softwareVersionCertificationStatus:uint date reason 
+starport scaffold --module compliance type ComplianceInformation vid:int pid:int softwareVersion:uint certificationType
 
 #    messages
 starport scaffold --module compliance message CertifyModel vid:int pid:int softwareVersion:uint softwareVersionString cDVersionNumber:uint certificationDate certificationType reason --signer signer
