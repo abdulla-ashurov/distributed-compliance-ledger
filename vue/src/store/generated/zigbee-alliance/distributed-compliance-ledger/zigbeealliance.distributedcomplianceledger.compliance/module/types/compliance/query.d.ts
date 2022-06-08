@@ -73,7 +73,7 @@ export interface QueryGetDeviceSoftwareComplianceRequest {
     CDCertificateID: string;
 }
 export interface QueryGetDeviceSoftwareComplianceResponse {
-    complianceInfo: ComplianceInfo | undefined;
+    complianceInfo: ComplianceInfo[];
 }
 export declare const QueryGetComplianceInfoRequest: {
     encode(message: QueryGetComplianceInfoRequest, writer?: Writer): Writer;

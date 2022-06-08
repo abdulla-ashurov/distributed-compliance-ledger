@@ -107,7 +107,7 @@ export interface ComplianceQueryGetComplianceInfoResponse {
     complianceInfo?: ComplianceComplianceInfo;
 }
 export interface ComplianceQueryGetDeviceSoftwareComplianceResponse {
-    complianceInfo?: ComplianceComplianceInfo;
+    complianceInfo?: ComplianceComplianceInfo[];
 }
 export interface ComplianceQueryGetProvisionalModelResponse {
     provisionalModel?: ComplianceProvisionalModel;

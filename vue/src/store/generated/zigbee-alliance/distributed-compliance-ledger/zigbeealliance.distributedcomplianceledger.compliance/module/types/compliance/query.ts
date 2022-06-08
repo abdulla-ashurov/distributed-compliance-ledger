@@ -93,7 +93,7 @@ export interface QueryGetDeviceSoftwareComplianceRequest {
 }
 
 export interface QueryGetDeviceSoftwareComplianceResponse {
-  complianceInfo: ComplianceInfo | undefined
+  complianceInfo: ComplianceInfo[]
 }
 
 const baseQueryGetComplianceInfoRequest: object = { vid: 0, pid: 0, softwareVersion: 0, certificationType: '' }
@@ -1335,8 +1335,8 @@ const baseQueryGetDeviceSoftwareComplianceResponse: object = {}
 
 export const QueryGetDeviceSoftwareComplianceResponse = {
   encode(message: QueryGetDeviceSoftwareComplianceResponse, writer: Writer = Writer.create()): Writer {
-    if (message.complianceInfo !== undefined) {
-      ComplianceInfo.encode(message.complianceInfo, writer.uint32(10).fork()).ldelim()
+    for (const v of message.complianceInfo) {
+      ComplianceInfo.encode(v!, writer.uint32(10).fork()).ldelim()
     }
     return writer
   },
@@ -1345,11 +1345,12 @@ export const QueryGetDeviceSoftwareComplianceResponse = {
     const reader = input instanceof Uint8Array ? new Reader(input) : input
     let end = length === undefined ? reader.len : reader.pos + length
     const message = { ...baseQueryGetDeviceSoftwareComplianceResponse } as QueryGetDeviceSoftwareComplianceResponse
+    message.complianceInfo = []
     while (reader.pos < end) {
       const tag = reader.uint32()
       switch (tag >>> 3) {
         case 1:
-          message.complianceInfo = ComplianceInfo.decode(reader, reader.uint32())
+          message.complianceInfo.push(ComplianceInfo.decode(reader, reader.uint32()))
           break
         default:
           reader.skipType(tag & 7)
@@ -1361,26 +1362,32 @@ export const QueryGetDeviceSoftwareComplianceResponse = {
 
   fromJSON(object: any): QueryGetDeviceSoftwareComplianceResponse {
     const message = { ...baseQueryGetDeviceSoftwareComplianceResponse } as QueryGetDeviceSoftwareComplianceResponse
+    message.complianceInfo = []
     if (object.complianceInfo !== undefined && object.complianceInfo !== null) {
-      message.complianceInfo = ComplianceInfo.fromJSON(object.complianceInfo)
-    } else {
-      message.complianceInfo = undefined
+      for (const e of object.complianceInfo) {
+        message.complianceInfo.push(ComplianceInfo.fromJSON(e))
+      }
     }
     return message
   },
 
   toJSON(message: QueryGetDeviceSoftwareComplianceResponse): unknown {
     const obj: any = {}
-    message.complianceInfo !== undefined && (obj.complianceInfo = message.complianceInfo ? ComplianceInfo.toJSON(message.complianceInfo) : undefined)
+    if (message.complianceInfo) {
+      obj.complianceInfo = message.complianceInfo.map((e) => (e ? ComplianceInfo.toJSON(e) : undefined))
+    } else {
+      obj.complianceInfo = []
+    }
     return obj
   },
 
   fromPartial(object: DeepPartial<QueryGetDeviceSoftwareComplianceResponse>): QueryGetDeviceSoftwareComplianceResponse {
     const message = { ...baseQueryGetDeviceSoftwareComplianceResponse } as QueryGetDeviceSoftwareComplianceResponse
+    message.complianceInfo = []
     if (object.complianceInfo !== undefined && object.complianceInfo !== null) {
-      message.complianceInfo = ComplianceInfo.fromPartial(object.complianceInfo)
-    } else {
-      message.complianceInfo = undefined
+      for (const e of object.complianceInfo) {
+        message.complianceInfo.push(ComplianceInfo.fromPartial(e))
+      }
     }
     return message
   }
