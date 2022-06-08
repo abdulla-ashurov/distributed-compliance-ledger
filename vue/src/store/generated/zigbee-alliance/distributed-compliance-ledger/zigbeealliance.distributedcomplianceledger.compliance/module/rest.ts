@@ -53,6 +53,7 @@ export interface ComplianceComplianceInfo {
   reason?: string;
   owner?: string;
   history?: ComplianceComplianceHistoryItem[];
+  CDCertificateID?: string;
 }
 
 export interface ComplianceComplianceInformation {

@@ -13,6 +13,7 @@ export interface ComplianceInfo {
     reason: string;
     owner: string;
     history: ComplianceHistoryItem[];
+    CDCertificateID: string;
 }
 export declare const ComplianceInfo: {
     encode(message: ComplianceInfo, writer?: Writer): Writer;
