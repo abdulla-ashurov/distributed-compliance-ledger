@@ -30,6 +30,7 @@ const (
 	FlagReasonShortcut            = "r"
 	FlagCDVersionNumber           = "cdVersionNumber"
 	FlagProvisionalDate           = "provisionalDate"
+	FlagCDCertificateID           = "CDCertificateID"
 
 	TextCertificationType = "Certification type - Currently 'zigbee' and 'matter' types are supported"
 )
