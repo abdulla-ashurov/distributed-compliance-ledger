@@ -2,7 +2,7 @@
 
 #    plain ones
 starport scaffold --module compliance type ComplianceHistoryItem softwareVersionCertificationStatus:uint date reason 
-starport scaffold --module compliance type ComplianceInformation vid:int pid:int softwareVersion:uint certificationType
+starport scaffold --module compliance type ComplianceInfoIndex vid:int pid:int softwareVersion:uint certificationType
 
 #    messages
 starport scaffold --module compliance message CertifyModel vid:int pid:int softwareVersion:uint softwareVersionString cDVersionNumber:uint certificationDate certificationType reason --signer signer
@@ -14,4 +14,4 @@ starport scaffold --module compliance map ComplianceInfo softwareVersionString c
 starport scaffold --module compliance map CertifiedModel value:bool --index vid:int,pid:int,softwareVersion:uint,certificationType --no-message
 starport scaffold --module compliance map RevokedModel value:bool --index vid:int,pid:int,softwareVersion:uint,certificationType --no-message
 starport scaffold --module compliance map ProvisionalModel value:bool --index vid:int,pid:int,softwareVersion:uint,certificationType --no-message
-starport scaffold --module compliance map DeviceSoftwareCompliance ComplianceInformation:strings --index CDCertificateID:string --no-message
+starport scaffold --module compliance map DeviceSoftwareCompliance ComplianceInfoIndex:strings --index CDCertificateID:string --no-message
