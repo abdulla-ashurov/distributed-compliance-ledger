@@ -23,5 +23,14 @@ func (k Keeper) DeviceSoftwareCompliance(c context.Context, req *types.QueryGetD
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetDeviceSoftwareComplianceResponse{ComplianceInfo: val}, nil
+	var complianceInfo []types.ComplianceInfo
+
+	for _, complianceInformation := range val.ComplianceInfoIndex {
+		info, found := k.GetComplianceInfo(ctx, complianceInformation.Vid, complianceInformation.Pid, complianceInformation.SoftwareVersion, complianceInformation.CertificationType)
+		if found {
+			complianceInfo = append(complianceInfo, info)
+		}
+	}
+
+	return &types.QueryGetDeviceSoftwareComplianceResponse{ComplianceInfo: complianceInfo}, nil
 }

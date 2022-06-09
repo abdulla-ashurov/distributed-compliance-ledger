@@ -1,40 +1,38 @@
 package cli
 
 import (
-	"context"
-
 	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
+	"github.com/zigbee-alliance/distributed-compliance-ledger/utils/cli"
 	"github.com/zigbee-alliance/distributed-compliance-ledger/x/compliance/types"
 )
 
 func CmdShowDeviceSoftwareCompliance() *cobra.Command {
+	var (
+		CDCertificateID string
+	)
+
 	cmd := &cobra.Command{
-		Use:   "show-device-software-compliance [cd-certificate-id]",
-		Short: "shows a DeviceSoftwareCompliance",
-		Args:  cobra.ExactArgs(1),
+		Use:   "device-software-compliance",
+		Short: "Shows a device software compliance",
+		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
+			var res types.DeviceSoftwareCompliance
 
-			queryClient := types.NewQueryClient(clientCtx)
-
-			argCDCertificateID := args[0]
-
-			params := &types.QueryGetDeviceSoftwareComplianceRequest{
-				CDCertificateID: argCDCertificateID,
-			}
-
-			res, err := queryClient.DeviceSoftwareCompliance(context.Background(), params)
-			if err != nil {
-				return err
-			}
-
-			return clientCtx.PrintProto(res)
+			return cli.QueryWithProof(
+				clientCtx,
+				types.StoreKey,
+				types.DeviceSoftwareComplianceKeyPrefix,
+				types.DeviceSoftwareComplianceKey(CDCertificateID),
+				&res,
+			)
 		},
 	}
 
-	flags.AddQueryFlagsToCmd(cmd)
+	cmd.Flags().StringVarP(&CDCertificateID, FlagCDCertificateID, FlagCDCertificateIDShortcut, "", TextCDCertificateID)
+
+	_ = cmd.MarkFlagRequired(FlagCDCertificateID)
 
 	return cmd
 }

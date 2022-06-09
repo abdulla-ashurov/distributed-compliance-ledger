@@ -31,6 +31,8 @@ const (
 	FlagCDVersionNumber           = "cdVersionNumber"
 	FlagProvisionalDate           = "provisionalDate"
 	FlagCDCertificateID           = "CDCertificateID"
+	FlagCDCertificateIDShortcut   = "c"
 
 	TextCertificationType = "Certification type - Currently 'zigbee' and 'matter' types are supported"
+	TextCDCertificateID   = "CD Certificate ID of the certification (19 character max string)"
 )
